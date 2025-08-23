@@ -1,6 +1,7 @@
 package com.deepak.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -17,9 +18,14 @@ public class LoggingAspect {
 //  execution(*,com.deepak.services.JobService.*(..)) --> this is point cut
 //	@Before --> this is advice
 
-	@Before("execution(* com.deepak.services.JobService.getJob(..)) || execution(* com.deepak.services.JobService.getJob(..))")
+	@Before("execution(* com.deepak.services.JobService.getJob(..)) || execution(* com.deepak.services.JobService.updateJob(..))")
 	public void logMethodCall(JoinPoint jp) {
 		LOGGER.info("Method Called.. " + jp.getSignature().getName());
+	}
+
+	@After("execution(* com.deepak.services.JobService.getJob(..)) || execution(* com.deepak.services.JobService.updateJob(..))")
+	public void logMethodExecuted(JoinPoint jp) {
+		LOGGER.info("Method Executed.. " + jp.getSignature().getName());
 	}
 
 }
