@@ -13,11 +13,11 @@ public class LoggingAspect {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 
-//	return_type, class_name(like., com.deepak.aop).method_name(argument)
+//	return_type class_name(like., com.deepak.aop).method_name(argument)
 //  execution(*,com.deepak.services.JobService.*(..)) --> this is point cut
 //	@Before --> this is advice
 
-	@Before("execution(*,com.deepak.services.JobService.*(..))")
+	@Before("execution(* com.deepak.services.JobService.getJob(..)) || execution(* com.deepak.services.JobService.getJob(..))")
 	public void logMethodCall(JoinPoint jp) {
 		LOGGER.info("Method Called.. " + jp.getSignature().getName());
 	}
